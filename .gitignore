@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Database file from core/database.py
+sql_app.db
+*.db
+*.sqlite3
+
+# Environment variables
+# Use this file to store secrets like SECRET_KEY
+.env
+.env.*
+.venv
+env/
+venv/
+
+# IDE and editor configuration
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing and Coverage
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Type checking and linting
+.mypy_cache/
+.ruff_cache/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+eggs/
