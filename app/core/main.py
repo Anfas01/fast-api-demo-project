@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from core.database import Base, engine
 from routers import user, product, authentication, cart, order
+from models import cart, order, product, user
 
 
 app = FastAPI()
