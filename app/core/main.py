@@ -5,7 +5,7 @@ from routers import user, product, authentication, cart, order
 
 app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine) 
 
 
 
