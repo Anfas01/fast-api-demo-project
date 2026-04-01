@@ -3,13 +3,13 @@ from fastapi import HTTPException
 from models.product import Product
 
 
-def product_create(product, db: Session, owner_name: str):
+def product_create(product, db: Session, owner_id: int):
     existing_product = db.query(Product).filter(Product.name==product.name).first()
 
     if existing_product:
         raise HTTPException(status_code=400, detail="Product already exists")
     
-    db_product = Product(name=product.name, owner_name=owner_name)
+    db_product = Product(name=product.name, owner_id=owner_id)
 
     db.add(db_product)
     db.commit()
@@ -29,7 +29,7 @@ def get_product(db: Session, product_name: str):
     
     return product
 
-def update_product(db: Session, old_product, new_product, owner_name: str):
+def update_product(db: Session, old_product, new_product, owner_id: int):
     product = db.query(Product).filter(Product.name==new_product.product_name).first()
     
     existing_product = db.query(Product).filter(Product.name==old_product).first()
@@ -40,7 +40,7 @@ def update_product(db: Session, old_product, new_product, owner_name: str):
     if product:
         raise HTTPException(status_code=400, detail="Product already exists")
     
-    if existing_product.owner_name != owner_name:
+    if existing_product.owner_id != owner_id:
         raise HTTPException(status_code=401, detail="You are not authorized to update this product")
     
 
@@ -57,13 +57,13 @@ def update_product(db: Session, old_product, new_product, owner_name: str):
 
 
 
-def delete_product(db: Session, product, owner_name):
+def delete_product(db: Session, product, owner_id: int):
     existing_product = db.query(Product).filter(Product.name==product).first()
 
     if not existing_product:
         raise HTTPException(status_code=404,detail="Product not found")
     
-    if existing_product.owner_name != owner_name:
+    if existing_product.owner_id != owner_id:
         raise HTTPException(status_code=401, detail="You are not authorized to delete this product")
     
     db.delete(existing_product)

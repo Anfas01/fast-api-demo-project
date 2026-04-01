@@ -7,8 +7,8 @@ class Cart(Base):
     __tablename__ = "carts"
 
     id = Column(Integer, primary_key=True, index=True)
-    owner_name = Column(String, ForeignKey("users.username"))
-    product_name = Column(String, ForeignKey("products.name"))
+    owner_id = Column(Integer, ForeignKey("users.id"))
+    product_id = Column(Integer, ForeignKey("products.id"))
     quantity = Column(Integer)
 
     owner = relationship("User")

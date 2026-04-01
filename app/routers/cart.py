@@ -12,14 +12,14 @@ router = APIRouter()
 
 @router.post("/")
 def add_to_cart(cart: CartCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return create_cart(db, cart, current_user.username)
+    return create_cart(db, cart, current_user.id)
 
 
 @router.get("/")
 def cart_view(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> list[CartResponseModel]:
-    return view_cart(db, current_user.username)
+    return view_cart(db, current_user.id)
 
 
-@router.delete("/{product_name}")
-def remove_cart(product_name: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return remove_from_cart(db, product_name, current_user.username)
+@router.delete("/{product_id}")
+def remove_cart(product_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return remove_from_cart(db, product_id, current_user.id)

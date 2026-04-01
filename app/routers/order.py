@@ -12,14 +12,14 @@ router = APIRouter()
 
 @router.post("/")
 def create_order(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> OrderPlacementResponse :
-    return place_order(db,current_user.username)
+    return place_order(db, current_user.id)
 
 
 @router.get("/", response_model=list[OrderResponseModel])
 def order_view(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return view_order(db, current_user.username)
+    return view_order(db, current_user.id)
 
 
-@router.delete("/{product_name}")
-def order_cancel(product_name: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return cancel_order(db, product_name, current_user.username)
+@router.delete("/{product_id}")
+def order_cancel(product_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return cancel_order(db, product_id, current_user.id)

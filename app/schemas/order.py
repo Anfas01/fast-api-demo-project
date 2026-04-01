@@ -6,7 +6,7 @@ from typing import List
 
 
 class OrderResponseModel(BaseModel):
-    product_name: str
+    product_id: int
     quantity: int
 
 

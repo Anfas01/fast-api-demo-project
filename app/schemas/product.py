@@ -8,7 +8,7 @@ class ProductCreate(BaseModel):
 
 class ProductsResponseModel(BaseModel):
     name: str
-    owner_name: str
+    user_id: str
     
     class Config:
         from_attributes = True

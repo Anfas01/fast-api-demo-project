@@ -9,6 +9,6 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    owner_name = Column(String, ForeignKey("users.username"))
+    owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="products")
