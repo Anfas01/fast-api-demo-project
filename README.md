@@ -21,6 +21,9 @@ A robust, RESTful backend API for an e-commerce platform built with **FastAPI** 
 
 ## 📂 Project Structure
 
+### 📂 Project Structure
+
+```text
 fast-api-demo-project/
 ├── app/
 │   ├── auth/          # Authentication dependencies & security logic
