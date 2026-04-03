@@ -29,9 +29,3 @@ A robust, RESTful backend API for an e-commerce platform built with **FastAPI** 
 `├── routers/       # FastAPI route definitions`
 `└── schemas/       # Pydantic models for request/response validation`
 
-## ⚙️ Setup and Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
