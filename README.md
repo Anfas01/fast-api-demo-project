@@ -21,11 +21,17 @@ A robust, RESTful backend API for an e-commerce platform built with **FastAPI** 
 
 ## 📂 Project Structure
 
-`app/`
-`├── auth/          # Authentication dependencies and logic`
-`├── core/          # Core configurations (Database setup, JWT tokens)`
-`├── crud/          # Database operations (Create, Read, Update, Delete)`
-`├── models/        # SQLAlchemy Database Models (User, Product, Cart, Order)`
-`├── routers/       # FastAPI route definitions`
-`└── schemas/       # Pydantic models for request/response validation`
+fast-api-demo-project/
+├── app/
+│   ├── auth/          # Authentication dependencies & security logic
+│   ├── core/          # Database engine setup & JWT configuration
+│   ├── crud/          # Database operations (Create, Read, Update, Delete)
+│   ├── models/        # SQLAlchemy Database Models (User, Product, etc.)
+│   ├── routers/       # FastAPI route definitions (Endpoints)
+│   ├── schemas/       # Pydantic models for request/response validation
+│   └── main.py        # Application entry point & FastAPI initialization
+|
+├── .gitignore         # Files to be excluded from Git
+├── requirements.txt   # Python dependencies
+└── README.md          # Project documentation
 
