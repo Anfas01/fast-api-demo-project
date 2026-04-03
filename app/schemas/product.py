@@ -8,7 +8,7 @@ class ProductCreate(BaseModel):
 
 class ProductsResponseModel(BaseModel):
     name: str
-    user_id: str
+    owner_id: int
     
     class Config:
         from_attributes = True
@@ -20,10 +20,3 @@ class ProductName(BaseModel):
         from_attributes = True
 
 
-class ProductUpdate(BaseModel):
-    product_name: str | None = None
-
-
-
-    class Config:
-        from_attributes = True

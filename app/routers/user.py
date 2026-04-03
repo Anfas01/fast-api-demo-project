@@ -18,3 +18,4 @@ def read_users(db: Session = Depends(get_db), current_user: User = Depends(get_c
 @router.get("/aboutMe")
 def about_me(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> UserResponseModel:
     return profile(db, user_name=current_user.username)
+

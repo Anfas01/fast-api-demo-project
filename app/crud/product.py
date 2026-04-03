@@ -1,9 +1,12 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from models.product import Product
+from models.cart import Cart
+from models.order import Order
+from schemas.product import ProductCreate
 
 
-def product_create(product, db: Session, owner_id: int):
+def product_create(product: ProductCreate, db: Session, owner_id: int):
     existing_product = db.query(Product).filter(Product.name==product.name).first()
 
     if existing_product:
@@ -29,36 +32,9 @@ def get_product(db: Session, product_name: str):
     
     return product
 
-def update_product(db: Session, old_product, new_product, owner_id: int):
-    product = db.query(Product).filter(Product.name==new_product.product_name).first()
-    
-    existing_product = db.query(Product).filter(Product.name==old_product).first()
 
-    if not existing_product:
-        raise HTTPException(status_code=404,detail="Product not found")
-    
-    if product:
-        raise HTTPException(status_code=400, detail="Product already exists")
-    
-    if existing_product.owner_id != owner_id:
-        raise HTTPException(status_code=401, detail="You are not authorized to update this product")
-    
-
-    
-    if new_product.product_name is not None:
-        existing_product.name = new_product.product_name
-    
-
-    db.add(existing_product)
-    db.commit()
-    db.refresh(existing_product)
-
-    return {"message": f"{old_product} has been updated to {existing_product.name} successfully"}
-
-
-
-def delete_product(db: Session, product, owner_id: int):
-    existing_product = db.query(Product).filter(Product.name==product).first()
+def delete_product(db: Session, product_name: str, owner_id: int):
+    existing_product = db.query(Product).filter(Product.name==product_name).first()
 
     if not existing_product:
         raise HTTPException(status_code=404,detail="Product not found")
@@ -66,10 +42,14 @@ def delete_product(db: Session, product, owner_id: int):
     if existing_product.owner_id != owner_id:
         raise HTTPException(status_code=401, detail="You are not authorized to delete this product")
     
+    # Safely remove product references in carts and orders to avoid Foreign Key constraint errors
+    db.query(Cart).filter(Cart.product_id == existing_product.id).delete()
+    db.query(Order).filter(Order.product_id == existing_product.id).delete()
+
     db.delete(existing_product)
     db.commit()
     
 
-    return {"message": f"{product} has been deleted successfully"}
+    return {"message": f"{product_name} has been deleted successfully"}
 
     

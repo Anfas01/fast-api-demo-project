@@ -2,12 +2,12 @@ from pydantic import BaseModel
 
 
 class CartCreate(BaseModel):
-    product_id: int
+    product_name: str
     quantity: int
 
 
 class CartResponseModel(BaseModel):
-    product_id: int
+    product_name: str
     quantity: int
 
     class Config:

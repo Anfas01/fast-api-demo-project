@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
 from models.user import User
 from schemas.cart import CartCreate, CartResponseModel
-from schemas.product import ProductName
 from sqlalchemy.orm import Session
 from core.database import get_db
 from auth.dependencies import get_current_user
@@ -20,6 +19,6 @@ def cart_view(db: Session = Depends(get_db), current_user: User = Depends(get_cu
     return view_cart(db, current_user.id)
 
 
-@router.delete("/{product_id}")
-def remove_cart(product_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    return remove_from_cart(db, product_id, current_user.id)
+@router.delete("/{product_name}")
+def remove_cart(product_name: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return remove_from_cart(db, product_name, current_user.id)
